@@ -1,0 +1,98 @@
+body {
+  background-color: #000;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #b4b4b46c;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(157, 197, 209);
+  border-radius: 3px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(255, 255, 255);
+}
+
+.img-logo {
+  width: 5rem;
+}
+
+.navegacion {
+  z-index: 1045;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+}
+
+.navegacion .nav-link {
+  color: #f7f594;
+}
+
+.font-serif {
+  font-family: "Times New Roman", Times, serif;
+}
+
+.navegacion .nav-link:hover,
+.navegacion .nav-link:focus {
+  text-decoration: underline;
+  color: #f8d574;
+}
+
+#nav-enlaces {
+  width: auto;
+}
+
+.heroImg {
+  height: 90vh;
+  object-fit: cover;
+  filter: brightness(0.5);
+}
+
+.addImg {
+  height: 30vh;
+  object-fit: cover;
+}
+
+#hero-title {
+  z-index: 1000;
+}
+
+#carritoImg {
+  height: 20vh;
+  overflow: hidden;
+}
+
+#carritoImg > img {
+  width: 100%;
+  height: 20vh;
+  object-position: 0 15%;
+  object-fit: cover;
+  filter: brightness(0.85);
+}
+
+.circulo {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #11113d;
+  border: 0.2rem solid rgb(121, 183, 255);
+  border-radius: 50%;
+  color: white;
+  text-align: center;
+  padding-top: 0.25rem;
+}
+
+.m-color {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: thin solid rgb(13, 21, 29);
+  border-radius: 50%;
+}

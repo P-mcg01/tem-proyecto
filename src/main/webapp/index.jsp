@@ -33,10 +33,10 @@
         >
         <!-- Enlaces -->
         <div id="nav-enlaces" class="mt-2 pt-2">
-          <a href="./carrito.jsp" class="me-3">
+          <a href="./carrito.jsp" class="me-3" style="text-decoration: none">
             <img src="./assets/img/shopping-cart.svg" alt="carrito" />
           </a>
-          <a href="./login.jsp">
+          <a href="./login.jsp" id="icono">
             <img src="./assets/img/user.svg" alt="usuario" />
           </a>
         </div>
@@ -46,19 +46,22 @@
     <!-- MENU -->
     <ul class="navegacion nav justify-content-center position-sticky top-0">
       <li class="nav-item">
-        <a class="nav-link" aria-current="page" href="shop.html">Hombre</a>
+        <a class="nav-link" href="CategoriaServlet?cat=sombreros">Sombreros</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Mujer</a>
+        <a class="nav-link" href="CategoriaServlet?cat=chaquetas">Chaquetas</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Niño</a>
+        <a class="nav-link" href="CategoriaServlet?cat=camisetas">Camisetas</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Niña</a>
+        <a class="nav-link" href="CategoriaServlet?cat=pantalones">Pantalones</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Marcas</a>
+        <a class="nav-link" href="CategoriaServlet?cat=vestidos">Vestidos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="CategoriaServlet?cat=zapatos">Zapatos</a>
       </li>
     </ul>
 
@@ -70,10 +73,14 @@
     >
       <div
         id="hero-title"
-        class="position-absolute top-50 start-50 translate-middle"
+        class="position-absolute top-50 start-50 translate-middle d-flex flex-column flex-nowrap align-items-center"
       >
-        <p class="text-white text-center h1 fw-light">Lorem Ipsum Dolor Sit</p>
-        <p class="text-light fs-5">Lorem ipsum dolor sit amet</p>
+        <p class="text-light fs-5">Liderando la moda de tu ciudad.</p>
+        <p class="text-white text-center h2 mb-4 ">Moda y calidad con buen precio</p>
+        <button type="button" id="btnMarcas" 
+                class="btn btn-outline-warning">
+          Ver marcas
+        </button>
       </div>
       <div class="carousel-indicators">
         <button
@@ -154,62 +161,62 @@
     </div>
 
     <!-- MARCAS -->
-    <div class="container-sm bg-light my-5 p-5 rounded-3">
-      <h2 class="text-dark text-center mb-3">ENCUENTRA TU MARCA FAVORITA</h2>
+    <div id="panelMarcas" class="container-sm bg-light my-5 p-5 rounded-3">
+      <h2 class="text-danger text-center mb-3">ENCUENTRA TU MARCA FAVORITA</h2>
       <div class="row d-flex flex-row flex-wrap gap-2 justify-content-center">
         <a href="MarcaServlet?marca=Adidas" class="w-25">
           <img
             src="./assets/img/adidas1.png"
-            class="img-thumbnail rounded-4"
+            class="img-thumbnail rounded-4 border border-primary"
             alt="logo"
           />          
         </a>
         <a href="MarcaServlet?marca=Nike" class="w-25">
           <img
             src="./assets/img/nike1.png"
-            class="img-thumbnail rounded-4"
+            class="img-thumbnail rounded-4 border border-primary"
             alt="logo"
           />        
         </a>
         <a href="MarcaServlet?marca=Asics" class="w-25">
           <img
             src="./assets/img/asics1.png"
-            class="img-thumbnail rounded-4"
+            class="img-thumbnail rounded-4 border border-primary"
             alt="logo"
           />        
         </a>
         <a href="MarcaServlet?marca=Columbia" class="w-25">
           <img
             src="./assets/img/columbia1.png"
-            class="img-thumbnail rounded-4"
+            class="img-thumbnail rounded-4 border border-primary"
             alt="logo"
           />        
         </a>
         <a href="MarcaServlet?marca=Converse" class="w-25">
           <img
             src="./assets/img/converse1.png"
-            class="img-thumbnail rounded-4"
+            class="img-thumbnail rounded-4 border border-primary"
             alt="logo"
           />        
         </a>
         <a href="MarcaServlet?marca=Puma" class="w-25">
           <img
             src="./assets/img/puma1.png"
-            class="img-thumbnail rounded-4"
+            class="img-thumbnail rounded-4 border border-primary"
             alt="logo"
           />        
         </a>
         <a href="MarcaServlet?marca=Reebok" class="w-25">
           <img
             src="./assets/img/reebok1.png"
-            class="img-thumbnail rounded-4"
+            class="img-thumbnail rounded-4 border border-primary"
             alt="logo"
           />        
         </a>
-        <a href="MarcaServlet?marca=Under_armor" class="w-25">
+        <a href="MarcaServlet?marca=Under Armor" class="w-25">
           <img
             src="./assets/img/under-armour1.png"
-            class="img-thumbnail rounded-4"
+            class="img-thumbnail rounded-4 border border-primary"
             alt="logo"
           />        
         </a>
@@ -275,8 +282,14 @@
     <script src="./libs/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script>
       const $nav = document.getElementsByClassName("navegacion");
+      const btnMarca = document.getElementById("btnMarcas");
+      const sectionMarcas = document.getElementById("panelMarcas");
+      
+      btnMarca.addEventListener("click", e => {
+        sectionMarcas.scrollIntoView({behavior: "smooth"});
+      });
 
-      $nav[0].style.backgroundColor = "rgba(0, 0, 0, 0.25)";
+      $nav[0].style.backgroundColor = "rgba(0, 0, 0, 0.45)";
     </script>
   </body>
 </html>

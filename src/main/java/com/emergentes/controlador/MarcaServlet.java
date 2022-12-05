@@ -64,6 +64,8 @@ public class MarcaServlet extends HttpServlet {
                 );
 
         request.setAttribute("productos", productosAdidas);
+        request.setAttribute("servlet", "marcas");
+        request.setAttribute("site", marca);
         request.getRequestDispatcher("shop.jsp").forward(request, response);
         break;
       case "Nike":
@@ -75,6 +77,8 @@ public class MarcaServlet extends HttpServlet {
                 );
 
         request.setAttribute("productos", productosNike);
+        request.setAttribute("servlet", "marcas");
+        request.setAttribute("site", marca);
         request.getRequestDispatcher("shop.jsp").forward(request, response);
 
         break;
@@ -87,6 +91,8 @@ public class MarcaServlet extends HttpServlet {
                 );
 
         request.setAttribute("productos", productosAsics);
+        request.setAttribute("servlet", "marcas");
+        request.setAttribute("site", marca);
         request.getRequestDispatcher("shop.jsp").forward(request, response);
         break;
       case "Columbia":
@@ -98,6 +104,8 @@ public class MarcaServlet extends HttpServlet {
                 );
 
         request.setAttribute("productos", productosColumbia);
+        request.setAttribute("servlet", "marcas");
+        request.setAttribute("site", marca);
         request.getRequestDispatcher("shop.jsp").forward(request, response);
 
         break;
@@ -110,6 +118,8 @@ public class MarcaServlet extends HttpServlet {
                 );
 
         request.setAttribute("productos", productosConverse);
+        request.setAttribute("servlet", "marcas");
+        request.setAttribute("site", marca);
         request.getRequestDispatcher("shop.jsp").forward(request, response);
 
         break;
@@ -122,21 +132,36 @@ public class MarcaServlet extends HttpServlet {
                 );
 
         request.setAttribute("productos", productosPuma);
+        request.setAttribute("servlet", "marcas");
+        request.setAttribute("site", marca);
         request.getRequestDispatcher("shop.jsp").forward(request, response);
 
         break;
-      case "Reebook":
+      case "Reebok":
+        ArrayList<Producto_InnerJoin> productosReebok
+                = lista.stream().filter(producto -> {
+                  return producto.getMarca().equals("Reebok");
+                }).collect(
+                        Collectors.toCollection(ArrayList::new)
+                );
+        
+        request.setAttribute("productos", productosReebok);
+        request.setAttribute("servlet", "marcas");
+        request.setAttribute("site", marca);
+        request.getRequestDispatcher("shop.jsp").forward(request, response);
 
         break;
-      case "Under_armor":
-        ArrayList<Producto_InnerJoin> productosReebook
+      case "Under Armor":
+        ArrayList<Producto_InnerJoin> productosUnder
                 = lista.stream().filter(producto -> {
-                  return producto.getMarca().equals("Under armor");
+                  return producto.getMarca().equals("Under Armor");
                 }).collect(
                         Collectors.toCollection(ArrayList::new)
                 );
 
-        request.setAttribute("productos", productosReebook);
+        request.setAttribute("productos", productosUnder);
+        request.setAttribute("servlet", "marcas");
+        request.setAttribute("site", marca);
         request.getRequestDispatcher("shop.jsp").forward(request, response);
 
         break;

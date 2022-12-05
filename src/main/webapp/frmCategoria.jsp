@@ -12,6 +12,9 @@
 
     </head>
     <body>
+        <jsp:include page="WEB-INF/menu.jsp">
+            <jsp:param name="opcion" value="categoria"/>
+        </jsp:include>
         <div class="container">
             <h1>Formulario Categoria</h1>
             <br>
@@ -19,9 +22,6 @@
             <c:if test="${categorias.categoria_id == 0}">Nuevo</c:if>
             <c:if test="${categorias.categoria_id != 0}">Editar</c:if>
             </h2> 
-            <jsp:include page="WEB-INF/menu.jsp">
-                <jsp:param name="opcion" value="categoria"/>
-            </jsp:include>
             <br>
             <form action="CategoriaController" method="post">
                 <input type="hidden" name="categoria_id" value="${categorias.categoria_id}"/>

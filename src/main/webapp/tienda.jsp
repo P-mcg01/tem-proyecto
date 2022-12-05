@@ -1,3 +1,8 @@
+<%
+  if(session.getAttribute("logueado") != "ok"){
+    response.sendRedirect("login.jsp");
+  }
+%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
@@ -13,11 +18,11 @@
         <title>TIENDA DE ROPAS</title>
     </head>
     <body>
+        <jsp:include page="WEB-INF/menu.jsp">
+            <jsp:param name="opcion" value="tienda"/>
+        </jsp:include>
         <div class="container">
             <h1>Tiendas</h1>
-            <jsp:include page="WEB-INF/menu.jsp">
-                <jsp:param name="opcion" value="tienda"/>
-            </jsp:include>
             <br>
             <a href="TiendaController?action=add" class="btn btn-primary btn-sm"><i class="fa-regular fa-square-plus"></i> Nuevo</a>
             <table class="table table-striped">
@@ -38,9 +43,9 @@
                         <td>
                             <a href="TiendaController?action=edit&id_tienda=${item.id_tienda}"><i class="fa-solid fa-pen-to-square"></i>Editar</a>
                         </td>
-                        <!--<td>
+                        <td>
                             <a href="TiendaController?action=delete&id_tienda=${item.id_tienda}" onclick="return(confirm('Esta seguro de eliminar???'))"><i class="fa-solid fa-trash"></i>Eliminar</a>
-                        </td>-->
+                        </td>
                     </tr>  
                 </c:forEach>
             </table>

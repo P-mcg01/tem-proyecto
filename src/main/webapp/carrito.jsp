@@ -10,6 +10,9 @@
   
   ArrayList<Producto_InnerJoin> carrito = (ArrayList<Producto_InnerJoin>)
           session.getAttribute("carrito");
+  int subTotal = carrito.stream().reduce(0, (subtotal, siguiente) -> {
+                    return subtotal + siguiente.getPrecio();
+                  }, Integer::sum);
 %>
 <!DOCTYPE html>
 <html lang="es">
@@ -34,7 +37,7 @@
         >
         <!-- Enlaces -->
         <div id="nav-enlaces" class="mt-2 pt-2">
-          <a href="./index.jsp" class="me-3">
+          <a href="./index.jsp" class="me-3" style="text-decoration: none">
             <img src="./assets/img/home.svg" alt="home" />
           </a>
           <a href="./login.jsp">
@@ -49,22 +52,28 @@
       <img src="./assets/img/bg-carrito.jpg" alt="carrito" />
     </div>
 
-    <div class="container-lg bg-light d-flex flex-row flex-wrap py-4">
+    <!-- MAIN CONTAINER -->
+    <div class="container-lg bg-light d-flex flex-row flex-wrap py-4 mb-4">
       <!-- PRODUCTOS -->
       <div
-        class="col-8 d-flex flex-column flex-nowrap justify-content-center px-3"
+        class="col-8 d-flex flex-column flex-nowrap px-3"
       >
-        <div class="d-flex flex-row flex-nowrap justify-content-between mb-2">
-          <a href="./MarcaServlet?marca=Puma" class="btn btn-dark">Seguir comprando</a>
+        <div class="d-flex flex-row flex-nowrap justify-content-between mb-4">
+          <a href="index.jsp" 
+             class="btn btn-outline-primary pt-2">Seguir comprando</a>
           <p class="pt-2">Lista de productos</p>
         </div>
+        
+        <c:if test="${carrito.size() == 0}">
+          <p class="mt-5 fs-3 text-center">El carro de compras está vacío :(</p>
+        </c:if>
 
         <c:forEach var="item" items="${carrito}">
           <div class="card mb-3">
             <div class="row g-0">
-              <div class="col-md-3">
+              <div class="col-md-3 d-flex flex-column flex-nowrap justify-content-center">
                 <img
-                  src="./assets/img/db/ropa.jpg"
+                  src="./assets/img/db/${item.producto_id}.jpg"
                   class="img-fluid rounded-start"
                   alt="producto"
                 />
@@ -72,11 +81,14 @@
               <div class="col-md-9">
                 <div class="card-body">
                   <h5 class="card-title">${item.nombre_prod}</h5>
-                  <h4>Bs. ${item.precio}</h4>
-                  <!--<p class="card-text">
-                    <small class="text-muted">Cantidad: 2</small>
-                  </p>-->
-                  <button type="button" class="btn btn-danger">Eliminar</button>
+                  <h6>Bs. ${item.precio}</h6>
+                  <p class="card-text">
+                    <small class="text-muted">Marca: ${item.marca}</small>
+                  </p>
+                  <a href="CarritoServlet?op=minus&producto_id=${item.producto_id}" 
+                     class="btn btn-danger">
+                    Eliminar
+                  </a>
                 </div>
               </div>
             </div>
@@ -89,15 +101,33 @@
         <p class="fs-3">TOTAL CARRITO</p>
         <hr />
         <p class="d-flex flex-row flex-nowrap justify-content-between">
-          SUBTOTAL <span class="fw-bold">Bs. 22250</span>
+          SUBTOTAL <span class="fw-bold">Bs. <%
+              if(carrito.size() == 0) {
+                out.print("0");
+              } else {
+                out.print(subTotal);
+              }
+            %></span>
         </p>
         <hr />
         <p class="d-flex flex-row flex-nowrap justify-content-between">
-          ENVIO <span class="fw-bold text-end">Bs. 250</span>
+          ENVIO <span class="fw-bold text-end">Bs. <%
+              if(carrito.size() == 0) {
+                out.print("0");
+              } else {
+                out.print("100");
+              }
+            %></span>
         </p>
         <hr />
         <p class="d-flex flex-row flex-nowrap justify-content-between">
-          TOTAL <span class="fw-bold">Bs. 22500</span>
+          TOTAL <span class="fw-bold">Bs. <%
+              if(carrito.size() == 0) {
+                out.print("0");
+              } else {
+                out.print(subTotal + 100);
+              }
+            %></span>
         </p>
         <button type="button" class="btn btn-success w-100">
           Finalizar Compra

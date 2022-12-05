@@ -1,3 +1,8 @@
+<%
+  if(session.getAttribute("logueado") != "ok"){
+    response.sendRedirect("login.jsp");
+  }
+%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
@@ -11,11 +16,11 @@
 
     </head>
     <body>
+        <jsp:include page="WEB-INF/menu.jsp">
+            <jsp:param name="opcion" value="categoria"/>
+        </jsp:include>
         <div class="container">
             <h1>Categoria</h1>
-            <jsp:include page="WEB-INF/menu.jsp">
-                <jsp:param name="opcion" value="categoria"/>
-            </jsp:include>
             <a href="CategoriaController?action=add" class="btn btn-primary btn-sm"><i class="fa-regular fa-square-plus"></i> Nuevo</a>
             <table class="table table-striped">
                 <tr>

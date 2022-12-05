@@ -12,6 +12,9 @@
 
     </head>
     <body>
+        <jsp:include page="WEB-INF/menu.jsp">
+            <jsp:param name="opcion" value="orden"/>
+        </jsp:include>
         <div class="container">
             <h1>Formulario Orden</h1>
             <br>
@@ -19,9 +22,6 @@
             <c:if test="${ordenes.orden_id == 0}">Nuevo</c:if>
             <c:if test="${ordenes.orden_id != 0}">Editar</c:if>
             </h2> 
-            <jsp:include page="WEB-INF/menu.jsp">
-                <jsp:param name="opcion" value="orden"/>
-            </jsp:include>
             <br>
             <form action="OrdenController" method="post">
                 <input type="hidden" name="orden_id" value="${ordenes.orden_id}"/>

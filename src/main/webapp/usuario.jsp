@@ -18,11 +18,11 @@ if(session.getAttribute("logueado")!="ok"){
         <title>TIENDA DE ROPAS</title>
     </head>
     <body>
+        <jsp:include page="WEB-INF/menu.jsp">
+            <jsp:param name="opcion" value="usuario"/>
+        </jsp:include>
         <div class="container">
             <h1>Usuario</h1>
-            <jsp:include page="WEB-INF/menu.jsp">
-                <jsp:param name="opcion" value="usuario"/>
-            </jsp:include>
             <br>
             <a href="UsuarioController?action=add" class="btn btn-primary btn-sm"><i class="fa-regular fa-square-plus"></i> Nuevo</a>
             <table class="table table-striped">

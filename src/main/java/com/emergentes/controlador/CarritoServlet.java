@@ -1,6 +1,5 @@
 package com.emergentes.controlador;
 
-import com.emergentes.DAO.ProductoDAOimple;
 import com.emergentes.modelo.Producto_InnerJoin;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,22 +17,42 @@ public class CarritoServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     final String id = request.getParameter("producto_id");
-    String marca = request.getParameter("marca");
+    String servlet = request.getParameter("servlet");
+    String sitio = request.getParameter("sitio");
+    String op = request.getParameter("op");
 
     HttpSession ses = request.getSession();
-    ArrayList<Producto_InnerJoin> productos = (ArrayList<Producto_InnerJoin>) 
-            ses.getAttribute("lista");
-    
     ArrayList<Producto_InnerJoin> carrito = (ArrayList<Producto_InnerJoin>) 
             ses.getAttribute("carrito");
-
-    // agregar un producto al carrito
-    Producto_InnerJoin buscado = productos.stream().filter(item -> {
-      return item.getProducto_id() == Integer.parseInt(id);
-    }).findFirst().get();
-    System.out.println("buscado " + buscado);
-
-    carrito.add(buscado);
-    response.sendRedirect("MarcaServlet?marca=" + marca);
+    
+    switch (op) {
+      case "add":
+        ArrayList<Producto_InnerJoin> productos = (ArrayList<Producto_InnerJoin>) 
+            ses.getAttribute("lista");
+        
+        // agregar un producto al carrito
+        Producto_InnerJoin buscado = productos.stream().filter(item -> {
+          return item.getProducto_id() == Integer.parseInt(id);
+        }).findFirst().get();
+        
+        carrito.add(buscado);
+        if(servlet.equals("marcas")) {
+          response.sendRedirect("MarcaServlet?marca=" + sitio);
+        }
+        if(servlet.equals("categorias")) {
+          response.sendRedirect("CategoriaServlet?cat=" + sitio);
+        }
+        break;
+      case "minus":
+        Producto_InnerJoin producto = carrito.stream().filter(item -> {
+          return item.getProducto_id() == Integer.parseInt(id);
+        }).findFirst().get();
+        
+        carrito.remove(producto);
+        response.sendRedirect("carrito.jsp");
+        break;
+      default:
+        response.sendRedirect("index.jsp");
+    }
   }
 }

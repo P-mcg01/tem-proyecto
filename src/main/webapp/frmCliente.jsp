@@ -12,15 +12,15 @@
 
     </head>
     <body>
+        <jsp:include page="WEB-INF/menu.jsp">
+            <jsp:param name="opcion" value="cliente"/>
+        </jsp:include>
         <div class="container">
             <h1>Formulario Cliente</h1>
             <h2>
                 <c:if test="${clientes.id == 0}">Nuevo</c:if>
                 <c:if test="${clientes.id != 0}">Editar</c:if>
                 </h2>
-            <jsp:include page="WEB-INF/menu.jsp">
-                <jsp:param name="opcion" value="cliente"/>
-            </jsp:include>
             <br>
             <form action="ClienteController" method="post">
                 <input type="hidden" name="id" value="${clientes.id}"/>

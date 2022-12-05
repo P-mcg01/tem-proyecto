@@ -1,3 +1,10 @@
+<%
+  if(session.getAttribute("logueado") != null) {
+    if(session.getAttribute("logueado").equals("ok")){
+      response.sendRedirect("ClienteController");
+    }
+  }  
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="es">
@@ -33,6 +40,7 @@
           </label>
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Ingresar</button>
+        <a class="w-100 btn btn-lg mt-2 btn-light" href="index.jsp">Regresar</a>
         <p class="mt-5 mb-3 text-muted">&copy;Emergentes II-2022 </p>
       </form>
     </main>

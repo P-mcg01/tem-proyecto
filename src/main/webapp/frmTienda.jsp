@@ -11,11 +11,11 @@
 
     </head>
     <body>
+        <jsp:include page="WEB-INF/menu.jsp">
+            <jsp:param name="opcion" value="tienda"/>
+        </jsp:include>
         <div class="container">
             <h1>Formulario Tienda</h1>
-            <jsp:include page="WEB-INF/menu.jsp">
-                <jsp:param name="opcion" value="tienda"/>
-            </jsp:include>
             <br>
             <form action="TiendaController" method="post">
                 <input type="hidden" name="id_tienda" value="${tiendas.id_tienda}"/>

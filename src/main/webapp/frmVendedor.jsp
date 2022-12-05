@@ -12,6 +12,9 @@
 
     </head>
     <body>
+        <jsp:include page="WEB-INF/menu.jsp">
+            <jsp:param name="opcion" value="vendedor"/>
+        </jsp:include>
         <div class="container">
             <h1>Formulario Vendedor</h1>
             <br>
@@ -19,9 +22,6 @@
             <c:if test="${vendedores.id == 0}">Nuevo</c:if>
             <c:if test="${vendedores.id != 0}">Editar</c:if>
             </h2> 
-            <jsp:include page="WEB-INF/menu.jsp">
-                <jsp:param name="opcion" value="vendedor"/>
-            </jsp:include>
             <br>
             <form action="VendedorController" method="post">
                 <input type="hidden" name="id" value="${vendedores.id}"/>

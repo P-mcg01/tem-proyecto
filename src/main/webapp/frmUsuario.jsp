@@ -17,15 +17,15 @@
 
     </head>
     <body>
+        <jsp:include page="WEB-INF/menu.jsp">
+            <jsp:param name="opcion" value="usuario"/>
+        </jsp:include>
         <div class="container">
             <h1>Formulario Usuario</h1>
             <h2>
                 <c:if test="${usuarios.id == 0}">Nuevo</c:if>
                 <c:if test="${usuarios.id != 0}">Editar</c:if>
                 </h2>
-            <jsp:include page="WEB-INF/menu.jsp">
-                <jsp:param name="opcion" value="usuario"/>
-            </jsp:include>
             <br>
             <form action="UsuarioController" method="post">
                 <input type="hidden" name="id" value="${usuarios.id}"/>

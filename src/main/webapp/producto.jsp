@@ -1,3 +1,8 @@
+<%
+  if(session.getAttribute("logueado") != "ok"){
+    response.sendRedirect("login.jsp");
+  }
+%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
@@ -13,11 +18,11 @@
         <title>TIENDA DE ROPAS</title>
     </head>
     <body>
+        <jsp:include page="WEB-INF/menu.jsp">
+            <jsp:param name="opcion" value="producto"/>
+        </jsp:include>
         <div class="container">
             <h1>Productos</h1>
-            <jsp:include page="WEB-INF/menu.jsp">
-                <jsp:param name="opcion" value="producto"/>
-            </jsp:include>
             <br>
             <a href="ProductoController?action=add" class="btn btn-primary btn-sm"><i class="fa-regular fa-square-plus"></i> Nuevo</a>
             <table class="table table-striped">
@@ -43,8 +48,8 @@
                             <a href="ProductoController?action=edit&producto_id=${item.producto_id}"><i class="fa-solid fa-pen-to-square"></i>Editar</a>
                         </td>
                         <td>
-                            <!--<a href="ProductoController?action=delete&producto_id=${item.producto_id}" onclick="return(confirm('Esta seguro de eliminar???'))"><i class="fa-solid fa-trash"></i>Eliminar</a>
-                        </td>-->
+                            <a href="ProductoController?action=delete&producto_id=${item.producto_id}" onclick="return(confirm('Esta seguro de eliminar???'))"><i class="fa-solid fa-trash"></i>Eliminar</a>
+                        </td>
                     </tr>  
                 </c:forEach>
             </table>

@@ -12,6 +12,9 @@
 
     </head>
     <body>
+        <jsp:include page="WEB-INF/menu.jsp">
+            <jsp:param name="opcion" value="marca"/>
+        </jsp:include>
         <div class="container">
             <h1>Formulario Categoria</h1>
             <br>
@@ -19,9 +22,6 @@
             <c:if test="${marcas.marca_id == 0}">Nuevo</c:if>
             <c:if test="${marcas.marca_id != 0}">Editar</c:if>
             </h2> 
-            <jsp:include page="WEB-INF/menu.jsp">
-                <jsp:param name="opcion" value="marca"/>
-            </jsp:include>
             <br>
             <form action="MarcaController" method="post">
                 <input type="hidden" name="marca_id" value="${marcas.marca_id}"/>

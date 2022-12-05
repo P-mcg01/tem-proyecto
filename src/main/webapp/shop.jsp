@@ -5,7 +5,9 @@
 <%
   ArrayList<Producto_InnerJoin> productos = (ArrayList<Producto_InnerJoin>) 
           request.getAttribute("productos");
-
+  String nombreServlet = (String) request.getAttribute("servlet");
+  String sitio = (String) request.getAttribute("site");
+  
   request.getSession().setAttribute("lista", productos);
 %>
 <!DOCTYPE html>
@@ -31,13 +33,13 @@
         >
         <!-- Enlaces -->
         <div id="nav-enlaces" class="mt-2 pt-2">
-          <a href="./index.jsp" class="me-3">
+          <a href="./index.jsp" class="me-3" style="text-decoration: none">
             <img src="./assets/img/home.svg" alt="home" />
           </a>
-          <a href="./carrito.jsp" class="me-3">
+          <a href="./carrito.jsp" class="me-3 " style="text-decoration: none">
             <img src="./assets/img/shopping-cart.svg" alt="carrito" />
           </a>
-          <a href="./login.jsp">
+          <a href="./login.jsp" style="text-decoration: none">
             <img src="./assets/img/user.svg" alt="usuario" />
           </a>
         </div>
@@ -47,19 +49,28 @@
     <!-- MENU -->
     <ul class="navegacion nav justify-content-center position-sticky top-0">
       <li class="nav-item">
-        <a class="nav-link" aria-current="page" href="shop.html">Hombre</a>
+        <a class="nav-link" href="MarcaServlet?marca=Adidas">Adidas</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Mujer</a>
+        <a class="nav-link" href="MarcaServlet?marca=Nike">Nike</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Niño</a>
+        <a class="nav-link" href="MarcaServlet?marca=Asics">Asics</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Niña</a>
+        <a class="nav-link" href="MarcaServlet?marca=Columbia">Columbia</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Marcas</a>
+        <a class="nav-link" href="MarcaServlet?marca=Converse">Converse</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="MarcaServlet?marca=Puma">Puma</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="MarcaServlet?marca=Reebok">Reebok</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="MarcaServlet?marca=Under Armor">Under Armor</a>
       </li>
     </ul>
 
@@ -88,15 +99,40 @@
               <div class="accordion-body">
                 <ul class="nav flex-column">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#"
-                       >ACCESORIOS</a
-                    >
+                    <a class="nav-link active" 
+                       href="CategoriaServlet?cat=sombreros">
+                      Sombreros
+                    </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">INDUMENTARIA</a>
+                    <a class="nav-link" 
+                       href="CategoriaServlet?cat=chaquetas">
+                      Chaquetas
+                    </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">ZAPATILLA</a>
+                    <a class="nav-link" 
+                       href="CategoriaServlet?cat=camisetas">
+                      Camisetas
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" 
+                       href="CategoriaServlet?cat=pantalones">
+                      Pantalones
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" 
+                       href="CategoriaServlet?cat=vestidos">
+                      Vestidos
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" 
+                       href="CategoriaServlet?cat=zapatos">
+                      Zapatos
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -172,36 +208,24 @@
       </div>
 
       <!-- PRODUCTOS -->
-      <div class="col-9 d-flex flex-row flex-wrap justify-content-center gap-3">
+      <div class="col-9 d-flex flex-row flex-wrap justify-content-center align-items-start gap-3">
         <c:forEach var="item" items="${productos}">
           <div class="card" style="width: 20rem">
-            <img src="./assets/img/db/ropa.jpg" class="card-img-top" alt="imagen_ropa" />
+            <img src="./assets/img/db/${item.producto_id}.jpg" class="card-img-top" alt="imagen_ropa" />
             <div class="card-body">
               <h6 class="card-title">${item.nombre_prod}</h6>
-              <p class="card-text fs-6">Marca: ${item.marca}</p>
-              <p class="card-text fs-6">Stock: ${item.stock}</p>
-              <p class="card-text fs-3">Bs. ${item.precio}</p>
+              <p class="card-text text-secondary fs-6">Marca: ${item.marca}</p>
+              <p class="card-text text-secondary fs-6">Stock: ${item.stock}</p>
+              <p class="card-text fw-bold text-primary fs-3 text-end">Bs. ${item.precio}</p>
               <a
-                href="CarritoServlet?producto_id=${item.producto_id}&marca=${item.marca}"
-                class="btn btn-primary w-100"
-                id="liveToastBtn"
+                href="CarritoServlet?producto_id=${item.producto_id}&op=add&servlet=<%= nombreServlet%>&sitio=<%= sitio%>"
+                class="btn btn-dark w-100"
                 >
                 Agregar al carrito
               </a>
             </div>
           </div>       
         </c:forEach>
-        <div class="toast align-items-center text-bg-primary border-0" 
-             role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="d-flex">
-            <div class="toast-body">
-              Hello, world! This is a toast message.
-            </div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" 
-                    data-bs-dismiss="toast" aria-label="Close"></button>
-          </div>
-        </div>
-
       </div>
     </div>
 

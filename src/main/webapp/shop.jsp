@@ -29,7 +29,7 @@
         <!-- Logo -->
         <img class="img-logo" src="./assets/img/logo.png" alt="logo" />
         <span class="font-serif text-light col-3 mt-2 fs-2 text-center"
-              >GUCCI</span
+              >NILTON</span
         >
         <!-- Enlaces -->
         <div id="nav-enlaces" class="mt-2 pt-2">

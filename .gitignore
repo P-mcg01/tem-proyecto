@@ -1,9 +1,6 @@
 # carpeta target
 /target
 
-# imagenes
-/src/main/webapp/assets/img
-
 # bootstrap
 /src/main/webapp/libs
 
